@@ -20,13 +20,13 @@ import java.util.Map;
 import javax.annotation.PostConstruct;
 import javax.enterprise.context.Dependent;
 
-import com.github.gwtbootstrap.client.ui.Modal;
 import com.google.gwt.user.client.ui.IsWidget;
 import org.dashbuilder.client.editor.resources.i18n.Constants;
 import org.dashbuilder.displayer.DisplayerSettings;
 import org.dashbuilder.displayer.client.json.DisplayerSettingsJSONMarshaller;
 import org.dashbuilder.displayer.client.widgets.DisplayerEditor;
 import org.dashbuilder.displayer.client.widgets.DisplayerView;
+import org.gwtbootstrap3.client.ui.Modal;
 import org.uberfire.ext.plugin.client.perspective.editor.api.ExternalPerspectiveEditorComponent;
 
 @Dependent
@@ -73,8 +73,8 @@ public class DisplayerPerspectiveEditorComponent implements ExternalPerspectiveE
 
     @Override
     public void modalSettings(Modal popup) {
-        popup.setWidth(900);
-        popup.setMaxHeigth("500px");
+        popup.setWidth(900 + "px");
+        //popup.setMaxHeigth("500px");
         popup.setTitle(Constants.INSTANCE.displayer_perspective_editor_title());
     }
 }

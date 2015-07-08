@@ -17,10 +17,6 @@ package org.dashbuilder.displayer.client.widgets;
 
 import javax.enterprise.context.Dependent;
 
-import com.github.gwtbootstrap.client.ui.CheckBox;
-import com.github.gwtbootstrap.client.ui.Tab;
-import com.github.gwtbootstrap.client.ui.TabPanel;
-import com.github.gwtbootstrap.client.ui.constants.VisibilityChange;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
@@ -42,6 +38,9 @@ import org.dashbuilder.displayer.client.DisplayerHelper;
 import org.dashbuilder.displayer.client.DisplayerListener;
 import org.dashbuilder.displayer.client.DisplayerLocator;
 import org.dashbuilder.displayer.client.resources.i18n.CommonConstants;
+import org.gwtbootstrap3.client.ui.CheckBox;
+import org.gwtbootstrap3.client.ui.NavTabs;
+import org.gwtbootstrap3.client.ui.TabListItem;
 
 @Dependent
 public class DisplayerEditorView extends Composite
@@ -86,16 +85,13 @@ public class DisplayerEditorView extends Composite
     public Panel centerPanel;
 
     @UiField
-    public TabPanel optionsPanel;
+    public TabListItem optionType;
 
     @UiField
-    public Tab optionType;
+    public TabListItem optionData;
 
     @UiField
-    public Tab optionData;
-
-    @UiField
-    public Tab optionSettings;
+    public TabListItem optionSettings;
 
     @UiField
     public Panel dataTablePanel;
@@ -113,12 +109,12 @@ public class DisplayerEditorView extends Composite
 
     @Override
     public void disableTypeSelection() {
-        optionType.addStyle(VisibilityChange.HIDE);
+        optionType.setVisible( false );
     }
 
     public void gotoLastTab() {
-        int selectedTab = optionsPanel.getSelectedTab();
         int lastTab = DisplayerEditorStatus.get().getSelectedTab(settings.getUUID());
+        int selectedTab = optionType.isActive() ? 0 : optionData.isActive() ? 1 : optionSettings.isActive() ? 2 : -1;
         if (selectedTab < 0 || selectedTab != lastTab) {
             switch (lastTab) {
                 case 2:
@@ -140,7 +136,6 @@ public class DisplayerEditorView extends Composite
 
     @Override
     public void gotoTypeSelection() {
-        optionsPanel.selectTab(0);
         saveLastTab(0);
 
         typeSelector.init(presenter);
@@ -154,7 +149,6 @@ public class DisplayerEditorView extends Composite
 
     @Override
     public void gotoDataSetConf() {
-        optionsPanel.selectTab(1);
         saveLastTab(1);
 
         if (settings.getDataSet() == null && settings.getDataSetLookup() != null) {
@@ -197,7 +191,6 @@ public class DisplayerEditorView extends Composite
 
     @Override
     public void gotoDisplaySettings() {
-        optionsPanel.selectTab(2);
         saveLastTab(2);
         optionSettings.setActive(true);
 

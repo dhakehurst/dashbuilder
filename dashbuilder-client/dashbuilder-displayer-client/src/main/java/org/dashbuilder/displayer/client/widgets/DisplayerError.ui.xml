@@ -19,7 +19,7 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
              xmlns:g='urn:import:com.google.gwt.user.client.ui'
-             xmlns:b="urn:import:com.github.gwtbootstrap.client.ui">
+             xmlns:b="urn:import:org.gwtbootstrap3.client.ui">
 
   <ui:with field="i18n" type="org.dashbuilder.displayer.client.resources.i18n.CommonConstants"/>
 
@@ -39,18 +39,18 @@
 
   <g:FlowPanel addStyleNames="{style.errorPanel}">
     <b:Row ui:field="errorMessageRow" addStyleNames="{style.errorRow}">
-      <b:Column size="1">
+      <b:Column size="MD_1">
         <g:Label text="{i18n.error}" addStyleNames="{style.errorLabel}"/>
       </b:Column>
-      <b:Column size="3">
+      <b:Column size="MD_3">
         <g:HTML ui:field="errorMessage" text=""/>
       </b:Column>
     </b:Row>
     <b:Row ui:field="errorCauseRow" addStyleNames="{style.errorRow}">
-      <b:Column size="1">
+      <b:Column size="MD_1">
         <g:Label text="{i18n.cause}" addStyleNames="{style.errorLabel}"/>
       </b:Column>
-      <b:Column size="3">
+      <b:Column size="MD_3">
         <g:HTML ui:field="errorCause" text=""/>
       </b:Column>
     </b:Row>

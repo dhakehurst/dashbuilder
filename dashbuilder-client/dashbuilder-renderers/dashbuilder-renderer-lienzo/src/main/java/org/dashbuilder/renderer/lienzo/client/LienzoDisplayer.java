@@ -303,7 +303,7 @@ public abstract class LienzoDisplayer extends AbstractDisplayer {
     }
 
     protected Widget createNoDataMsgPanel() {
-        return new com.github.gwtbootstrap.client.ui.Label("NO DATA");
+        return new org.gwtbootstrap3.client.ui.Label("NO DATA");
     }
 
     protected Widget createCurrentSelectionWidget() {
@@ -320,7 +320,7 @@ public abstract class LienzoDisplayer extends AbstractDisplayer {
             DataColumn column = dataSet.getColumnById(columnId);
             for (Interval interval : selectedValues) {
                 String formattedValue = formatInterval(interval, column);
-                panel.add(new com.github.gwtbootstrap.client.ui.Label(formattedValue));
+                panel.add(new org.gwtbootstrap3.client.ui.Label(formattedValue));
             }
         }
 

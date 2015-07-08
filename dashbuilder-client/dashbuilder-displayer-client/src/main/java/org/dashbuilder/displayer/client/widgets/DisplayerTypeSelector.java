@@ -19,9 +19,6 @@ import java.util.List;
 import java.util.ArrayList;
 import javax.enterprise.context.Dependent;
 
-import com.github.gwtbootstrap.client.ui.Tab;
-import com.github.gwtbootstrap.client.ui.TabPanel;
-import com.github.gwtbootstrap.client.ui.resources.Bootstrap;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
@@ -33,6 +30,9 @@ import com.google.gwt.user.client.ui.Widget;
 import org.dashbuilder.displayer.DisplayerSubType;
 import org.dashbuilder.displayer.DisplayerType;
 import org.dashbuilder.displayer.client.resources.i18n.DisplayerTypeLiterals;
+import org.gwtbootstrap3.client.ui.NavTabs;
+import org.gwtbootstrap3.client.ui.TabListItem;
+import org.gwtbootstrap3.client.ui.TabPanel;
 
 @Dependent
 public class DisplayerTypeSelector extends Composite implements DisplayerSubtypeSelector.SubTypeChangeListener {
@@ -49,8 +49,11 @@ public class DisplayerTypeSelector extends Composite implements DisplayerSubtype
     DisplayerSubType selectedSubType = null;
     List<DisplayerTab> tabList = new ArrayList<DisplayerTab>();
 
-    @UiField(provided = true)
+    @UiField
     TabPanel displayerTypePanel;
+
+    @UiField
+    NavTabs navTabs;
 
     @UiField
     VerticalPanel displayerSubtypePanel;
@@ -68,9 +71,10 @@ public class DisplayerTypeSelector extends Composite implements DisplayerSubtype
         tabList.add(new DisplayerTab(DisplayerTypeLiterals.INSTANCE.displayer_type_selector_tab_map(), DisplayerType.MAP));
         tabList.add(new DisplayerTab(DisplayerTypeLiterals.INSTANCE.displayer_type_selector_tab_table(), DisplayerType.TABLE));
 
-        displayerTypePanel = new TabPanel(Bootstrap.Tabs.LEFT);
-        displayerTypePanel.getElement().setId("dispTypes"); //for selenium
-        for (DisplayerTab tab : tabList) displayerTypePanel.add(tab);
+        //displayerTypePanel.getElement().setId("dispTypes"); //for selenium
+        for (DisplayerTab tab : tabList) {
+            navTabs.add(tab);
+        }
 
         initWidget(uiBinder.createAndBindUi(this));
 
@@ -88,14 +92,12 @@ public class DisplayerTypeSelector extends Composite implements DisplayerSubtype
     protected void draw() {
         displayerTypePanel.clear();
 
-        for (int i = 0; i < tabList.size(); i++) {
-            DisplayerTab tab = tabList.get(i);
-            tab.setActive(false);
-            displayerTypePanel.add(tab);
+        for ( final DisplayerTab tab : tabList ) {
+            tab.setActive( false );
+            displayerTypePanel.add( tab );
 
-            if (tab.type.equals(selectedType)) {
-                tab.setActive(true);
-                displayerTypePanel.selectTab(i);
+            if ( tab.type.equals( selectedType ) ) {
+                tab.setActive( true );
             }
         }
     }
@@ -115,18 +117,17 @@ public class DisplayerTypeSelector extends Composite implements DisplayerSubtype
         }
     }
 
-    private class DisplayerTab extends Tab {
-        
+    private class DisplayerTab extends TabListItem {
+
         String name;
         DisplayerType type;
 
         public DisplayerTab(String name, final DisplayerType type) {
-            super();
-            super.setHeading(name);
+            super(name);
 
             this.name = name;
             this.type = type;
-            
+
             super.addClickHandler(new ClickHandler() {
                 public void onClick(ClickEvent event) {
                     event.stopPropagation();
