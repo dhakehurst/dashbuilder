@@ -19,6 +19,8 @@
       margin-bottom: 20px;
       min-height: 20px;
       padding: 19px;
+      margin-top: 10px;
+      margin-left: 18px;
     }
   </ui:style>
 

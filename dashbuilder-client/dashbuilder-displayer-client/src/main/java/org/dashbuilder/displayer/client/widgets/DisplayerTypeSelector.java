@@ -71,13 +71,13 @@ public class DisplayerTypeSelector extends Composite implements DisplayerSubtype
         tabList.add(new DisplayerTab(DisplayerTypeLiterals.INSTANCE.displayer_type_selector_tab_map(), DisplayerType.MAP));
         tabList.add(new DisplayerTab(DisplayerTypeLiterals.INSTANCE.displayer_type_selector_tab_table(), DisplayerType.TABLE));
 
+        initWidget(uiBinder.createAndBindUi(this));
+
         //displayerTypePanel.getElement().setId("dispTypes"); //for selenium
         for (DisplayerTab tab : tabList) {
             navTabs.add(tab);
         }
-
-        initWidget(uiBinder.createAndBindUi(this));
-
+        
         subtypeSelector = new DisplayerSubtypeSelector(this);
         displayerSubtypePanel.add(subtypeSelector);
         displayerSubtypePanel.getElement().setId("dispSubtypes"); //for selenium

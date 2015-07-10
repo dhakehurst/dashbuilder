@@ -30,6 +30,7 @@
     .editorPanel {
       margin: 15px;
       overflow-y: auto;
+      overflow-x: hidden;
     }
 
     .providerTypeEditor {
@@ -69,13 +70,13 @@
       border: 1px solid lavender;
       border-left-width: 0px;
       cursor: pointer;
-      margin-top: 41px;
+      margin-top: 44px;
       height: 450px;
       left: 10px;
     }
 
     .columnsFilterDisclosurePanelHeaderOpen {
-      left: 376px;
+      left: 360px;
     }
 
     .columnsFilterDisclosurePanelButton {
@@ -95,6 +96,7 @@
       width: 340px;
       overflow: hidden;
       height: 450px;
+      margin-top: 10px;
     }
 
     .specificProviderAttributesPanel {
@@ -242,8 +244,8 @@
 
                       <b:NavTabs>
                         <!-- Columns. -->
-                        <b:TabListItem title="{i18n.dataColumns}" active="true" ui:field="columnsTabItem"/>
-                        <b:TabListItem title="{i18n.filter}" ui:field="filterTabItem"/>
+                        <b:TabListItem title="{i18n.dataColumns}" text="{i18n.dataColumns}" active="true" ui:field="columnsTabItem"/>
+                        <b:TabListItem title="{i18n.filter}" text="{i18n.filter}" ui:field="filterTabItem"/>
                       </b:NavTabs>
                       <b:TabContent>
                         <!-- Preview & columns & filter. -->
