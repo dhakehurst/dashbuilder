@@ -148,24 +148,26 @@
     <!-- Error panel. -->
     <b:Modal ui:field="errorPanel" title="{i18n.error}" dataBackdrop="STATIC" dataKeyboard="true" fade="true">
 
-      <g:FlowPanel addStyleNames="{style.errorPanel}">
-        <b:Row ui:field="errorMessageRow" addStyleNames="{style.errorRow}">
-          <b:Column size="MD_1">
-            <g:Label text="{i18n.message}" addStyleNames="{style.errorLabel}"/>
-          </b:Column>
-          <b:Column size="MD_3">
-            <g:HTML ui:field="errorMessage" text=""/>
-          </b:Column>
-        </b:Row>
-        <b:Row ui:field="errorCauseRow" addStyleNames="{style.errorRow}">
-          <b:Column size="MD_1">
-            <g:Label text="{i18n.cause}" addStyleNames="{style.errorLabel}"/>
-          </b:Column>
-          <b:Column size="MD_3">
-            <g:HTML ui:field="errorCause" text=""/>
-          </b:Column>
-        </b:Row>
-      </g:FlowPanel>
+      <b:ModalBody>
+        <b:Container fluid="true" addStyleNames="{style.errorPanel}">
+          <b:Row ui:field="errorMessageRow" addStyleNames="{style.errorRow}">
+            <b:Column size="MD_12">
+              <g:Label text="{i18n.message}" addStyleNames="{style.errorLabel}"/>
+            </b:Column>
+            <b:Column size="MD_12">
+              <g:HTML ui:field="errorMessage" text=""/>
+            </b:Column>
+          </b:Row>
+          <b:Row ui:field="errorCauseRow" addStyleNames="{style.errorRow}">
+            <b:Column size="MD_12">
+              <g:Label text="{i18n.cause}" addStyleNames="{style.errorLabel}"/>
+            </b:Column>
+            <b:Column size="MD_12">
+              <g:HTML ui:field="errorCause" text=""/>
+            </b:Column>
+          </b:Row>
+        </b:Container>
+      </b:ModalBody>
 
       <b:ModalFooter>
         <b:Button ui:field="errorPanelButton" icon="CHECK" type="PRIMARY" text="{i18n.ok}"/>
@@ -247,7 +249,7 @@
                         <b:TabListItem title="{i18n.dataColumns}" text="{i18n.dataColumns}" active="true" ui:field="columnsTabItem"/>
                         <b:TabListItem title="{i18n.filter}" text="{i18n.filter}" ui:field="filterTabItem"/>
                       </b:NavTabs>
-                      <b:TabContent>
+                      <b:TabContent marginTop="10">
                         <!-- Preview & columns & filter. -->
                         <b:TabPane ui:field="columnsTabPane" active="true">
                           <dash-dset-editors:DataSetColumnsEditor editMode="true" ui:field="columnsEditor" addStyleNames="{style.columnsEditor}"/>

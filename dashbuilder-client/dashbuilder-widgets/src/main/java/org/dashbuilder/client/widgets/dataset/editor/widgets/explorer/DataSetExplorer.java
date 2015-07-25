@@ -106,7 +106,7 @@ public class DataSetExplorer implements IsWidget {
 
         final DataSetDef def = event.getDataSetDef();
         if (def != null && def.isPublic()) {
-            addDataSetDef(event.getDataSetDef());
+            show();
         }
     }
 
