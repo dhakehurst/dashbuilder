@@ -30,9 +30,7 @@ import com.google.gwt.user.client.ui.Widget;
 import org.dashbuilder.displayer.DisplayerSubType;
 import org.dashbuilder.displayer.DisplayerType;
 import org.dashbuilder.displayer.client.resources.i18n.DisplayerTypeLiterals;
-import org.gwtbootstrap3.client.ui.NavTabs;
-import org.gwtbootstrap3.client.ui.TabListItem;
-import org.gwtbootstrap3.client.ui.TabPanel;
+import org.gwtbootstrap3.client.ui.*;
 
 @Dependent
 public class DisplayerTypeSelector extends Composite implements DisplayerSubtypeSelector.SubTypeChangeListener {
@@ -50,13 +48,10 @@ public class DisplayerTypeSelector extends Composite implements DisplayerSubtype
     List<DisplayerTab> tabList = new ArrayList<DisplayerTab>();
 
     @UiField
-    TabPanel displayerTypePanel;
-
-    @UiField
     NavTabs navTabs;
-
+    
     @UiField
-    VerticalPanel displayerSubtypePanel;
+    TabPane displayerSubTypePane;
 
     private DisplayerSubtypeSelector subtypeSelector;
 
@@ -73,14 +68,13 @@ public class DisplayerTypeSelector extends Composite implements DisplayerSubtype
 
         initWidget(uiBinder.createAndBindUi(this));
 
-        //displayerTypePanel.getElement().setId("dispTypes"); //for selenium
+        subtypeSelector = new DisplayerSubtypeSelector(this);
+        displayerSubTypePane.add(subtypeSelector);
+
         for (DisplayerTab tab : tabList) {
-            navTabs.add(tab);
+            addTab(tab);
         }
         
-        subtypeSelector = new DisplayerSubtypeSelector(this);
-        displayerSubtypePanel.add(subtypeSelector);
-        displayerSubtypePanel.getElement().setId("dispSubtypes"); //for selenium
     }
 
     public void init(Listener listener) {
@@ -90,16 +84,18 @@ public class DisplayerTypeSelector extends Composite implements DisplayerSubtype
 
 
     protected void draw() {
-        displayerTypePanel.clear();
+        navTabs.clear();
 
         for ( final DisplayerTab tab : tabList ) {
-            tab.setActive( false );
-            displayerTypePanel.add( tab );
-
-            if ( tab.type.equals( selectedType ) ) {
-                tab.setActive( true );
-            }
+            addTab(tab);
+            tab.setActive( tab.type.equals( selectedType ) );
         }
+        displayerSubTypePane.setActive(true);
+    }
+    
+    private void addTab(final DisplayerTab tab) {
+        tab.setDataTargetWidget(displayerSubTypePane);
+        navTabs.add(tab);
     }
 
     public void select(String renderer, final DisplayerType type, final DisplayerSubType subtype) {
@@ -122,7 +118,7 @@ public class DisplayerTypeSelector extends Composite implements DisplayerSubtype
         String name;
         DisplayerType type;
 
-        public DisplayerTab(String name, final DisplayerType type) {
+        public DisplayerTab(final String name, final DisplayerType type) {
             super(name);
 
             this.name = name;

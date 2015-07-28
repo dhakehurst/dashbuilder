@@ -15,23 +15,22 @@
  */
 package org.dashbuilder.displayer.client.widgets;
 
-import javax.enterprise.context.Dependent;
-import javax.inject.Inject;
-
 import com.google.gwt.core.client.GWT;
-import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
-import com.google.gwt.uibinder.client.UiHandler;
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.Command;
 import org.dashbuilder.displayer.DisplayerSettings;
 import org.dashbuilder.displayer.client.resources.i18n.CommonConstants;
+import org.gwtbootstrap3.client.ui.ModalBody;
 import org.uberfire.ext.widgets.common.client.common.popups.BaseModal;
+import org.uberfire.ext.widgets.common.client.common.popups.footers.ModalFooterOKCancelButtons;
+
+import javax.enterprise.context.Dependent;
 
 @Dependent
 public class DisplayerEditorPopup extends BaseModal {
 
-    interface Binder extends UiBinder<Widget, DisplayerEditorPopup> {}
+    interface Binder extends UiBinder<ModalBody, DisplayerEditorPopup> {}
     private static Binder uiBinder = GWT.create(Binder.class);
 
     @UiField(provided = true)
@@ -44,7 +43,10 @@ public class DisplayerEditorPopup extends BaseModal {
     public DisplayerEditorPopup(DisplayerEditor editor) {
         this.editor = editor;
         add(uiBinder.createAndBindUi(this));
-        //setMaxHeigth("550px");
+        ModalFooterOKCancelButtons footer = new ModalFooterOKCancelButtons(okCommand, cancelCommand);
+        footer.enableCancelButton(true);
+        footer.enableOkButton(true);
+        add(footer);
         setWidth(950+"px");
     }
 
@@ -55,15 +57,20 @@ public class DisplayerEditorPopup extends BaseModal {
         show();
     }
 
-    @UiHandler("cancelButton")
-    void cancel(final ClickEvent event) {
-        hide();
-        editor.close();
-    }
+    private final Command cancelCommand = new Command() {
+        @Override
+        public void execute() {
+            hide();
+            editor.close();
+        }
+    };
 
-    @UiHandler("okButton")
-    void ok(final ClickEvent event) {
-        hide();
-        editor.save();
-    }
+    private final Command okCommand = new Command() {
+        @Override
+        public void execute() {
+            hide();
+            editor.save();
+        }
+    };
+
 }
