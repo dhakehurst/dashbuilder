@@ -1,0 +1,27 @@
+PatternFly/BS3 integration
+***************************
+- Data Set Editor
+    - Editor's title does not show the current editing data set's name
+    - CSV -> File upload not working
+    - Test EL provider...
+- Data Set Explorer
+    - Data sets list -> duplicated several times!pic
+- Create new data set
+    - Bean -> use cluster metrics
+        org.dashbuilder.backend.ClusterMetricsGenerator
+        overloadedNodes
+        timeFrame 10minute
+        aliveNodes server1,server2,server3,server4,serve
+    - Remove cpu0 column & save -> bug
+    - On data set created -> explorer size calculations = 0 -> bug
+- New dashboard
+    - Perspective menu items not visible initially, if moving to another perspective and going back to the recent new one just created, they appear on other position
+- Displayer editor
+    - Property editor
+        - Displayed incorrectly
+        - show overflow-y
+- Apps not working
+- Optional
+    - Use this opportunity for refactoring Data Set Editor as already done with the Explorer?
+- NOTES
+    - CAREFUL! -> uf-extensions from uf porcelli's fork (patternfly brach) MUST be compiled before!
