@@ -16,12 +16,14 @@ PatternFly/BS3 integration
     - On data set created -> explorer size calculations = 0 -> bug
 - New dashboard
     - Perspective menu items not visible initially, if moving to another perspective and going back to the recent new one just created, they appear on other position
+    - Delete dashboard not working (neither in master branch)
 - Displayer editor
     - Property editor
         - Displayed incorrectly
         - show overflow-y
 - Apps not working
 - Optional
+    - Only show the BrandLogo for Home and Gallery perspectives (see dashbuilder-webapp/src/main/java/org/dashbuilder/client/ShowcaseEntryPoint.java)
     - Use this opportunity for refactoring Data Set Editor as already done with the Explorer?
 - NOTES
     - CAREFUL! -> uf-extensions from uf porcelli's fork (patternfly brach) MUST be compiled before!
