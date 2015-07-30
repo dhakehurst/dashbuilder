@@ -2,10 +2,14 @@ PatternFly/BS3 integration
 ***************************
 - Data Set Editor
     - Editor's title does not show the current editing data set's name
-    - CSV -> File upload not working
-    - Test EL provider...
+    - Test button not working when editing!
+        - Changing any parameter (attribute) does not takes effect. Eg: on cluster metrics, remove an alive server node. (not working in master neither)
+        - Seems that on changing the definition, the modifications are not registered on the backend.
+        - CSV -> File upload not working
+        - Test EL provider...
+    - https://issues.jboss.org/browse/DASHBUILDE-28
 - Data Set Explorer
-    - Data sets list -> duplicated several times!pic
+    - Data sets list -> duplicated several times! (always first time shown after a server startup)
 - Create new data set
     - Bean -> use cluster metrics
         org.dashbuilder.backend.ClusterMetricsGenerator
@@ -16,7 +20,6 @@ PatternFly/BS3 integration
     - On data set created -> explorer size calculations = 0 -> bug
 - New dashboard
     - Perspective menu items not visible initially, if moving to another perspective and going back to the recent new one just created, they appear on other position
-    - Delete dashboard not working (neither in master branch)
 - Displayer editor
     - Property editor
         - Displayed incorrectly
@@ -27,3 +30,27 @@ PatternFly/BS3 integration
     - Use this opportunity for refactoring Data Set Editor as already done with the Explorer?
 - NOTES
     - CAREFUL! -> uf-extensions from uf porcelli's fork (patternfly brach) MUST be compiled before!
+    
+    
+    
+SQL examples
+************
+CREATE TABLE test1 (
+  id VARCHAR(255),
+  columnStr VARCHAR(255),
+  columnNumber BIGINT,
+  columnDate TIMESTAMP,
+  PRIMARY KEY (id)
+);
+insert into test1(id,columnStr,columnNumber,columnDate) values ('1', 'first test string', 300, PARSEDATETIME('09/01/2013 00:25', 'd/MM/yyyy HH:mm', 'en', 'GMT'));
+insert into test1(id,columnStr,columnNumber,columnDate) values ('2', 'second test string', 300, PARSEDATETIME('09/01/2014 00:25', 'd/MM/yyyy HH:mm', 'en', 'GMT'));
+
+CREATE TABLE test2 (
+  id2 VARCHAR(255),
+  columnStr2 VARCHAR(255),
+  columnNumber2 BIGINT,
+  columnDate2 TIMESTAMP,
+  PRIMARY KEY (id2)
+);
+insert into test2(id2,columnStr2,columnNumber2,columnDate2) values ('3', 'table test2 first row', 300, PARSEDATETIME('09/12/2001 00:25', 'd/MM/yyyy HH:mm', 'en', 'GMT'));
+insert into test2(id2,columnStr2,columnNumber2,columnDate2) values ('4', 'table test2 second row', 300, PARSEDATETIME('09/12/2002 00:25', 'd/MM/yyyy HH:mm', 'en', 'GMT'));

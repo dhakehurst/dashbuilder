@@ -111,7 +111,8 @@
     }
 
     .previewTable {
-      overflow: hidden;
+      height: 100%;
+      overflow: auto;
     }
 
     .tabInnerPanel {
@@ -290,11 +291,11 @@
       </b:Popover>
 
       <!-- Test provider settings button. -->
-      <b:Popover ui:field="testPopover" showDelayMs="500" content="{i18n.test_description}" title="{i18n.test}">
+      <b:Popover placement="RIGHT" ui:field="testPopover" showDelayMs="500" content="{i18n.test_description}" title="{i18n.test}">
         <b:Button text="{i18n.test}" ui:field="testButton" type="PRIMARY"/>
       </b:Popover>
 
-      <b:Popover ui:field="nextPopover" showDelayMs="500" content="{i18n.next_description}" title="{i18n.next}">
+      <b:Popover placement="RIGHT" ui:field="nextPopover" showDelayMs="500" content="{i18n.next_description}" title="{i18n.next}">
         <b:Button text="{i18n.next}" ui:field="nextButton" type="PRIMARY"/>
       </b:Popover>
 
