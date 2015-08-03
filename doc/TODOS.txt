@@ -2,9 +2,9 @@ PatternFly/BS3 integration
 ***************************
 - Data Set Editor
     - Editor's title does not show the current editing data set's name
+    - Review helper popovers
     - Test button not working when editing!
         - Changing any parameter (attribute) does not takes effect. Eg: on cluster metrics, remove an alive server node. (not working in master neither)
-        - Seems that on changing the definition, the modifications are not registered on the backend.
         - CSV -> File upload not working
         - Test EL provider...
     - https://issues.jboss.org/browse/DASHBUILDE-28
