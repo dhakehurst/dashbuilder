@@ -225,6 +225,11 @@ public class DataSetExplorerView extends Composite implements DataSetExplorer.Vi
                 typeIcon.setAltText(DataSetExplorerConstants.INSTANCE.sql());
                 typeIcon.setTitle(DataSetExplorerConstants.INSTANCE.sql());
                 break;
+            case REST:
+                typeIcon = new Image(DataSetClientResources.INSTANCE.images().restIcon32().getSafeUri());
+                typeIcon.setAltText(DataSetExplorerConstants.INSTANCE.rest());
+                typeIcon.setTitle(DataSetExplorerConstants.INSTANCE.rest());
+                break;
             case ELASTICSEARCH:
                 typeIcon = new Image(DataSetClientResources.INSTANCE.images().elIcon32().getSafeUri());
                 typeIcon.setAltText(DataSetExplorerConstants.INSTANCE.el());

@@ -40,6 +40,7 @@ import org.dashbuilder.client.widgets.dataset.editor.DataSetDefEditWorkflow;
 import org.dashbuilder.client.widgets.dataset.editor.widgets.editors.*;
 import org.dashbuilder.client.widgets.dataset.editor.widgets.editors.bean.BeanDataSetDefAttributesEditor;
 import org.dashbuilder.client.widgets.dataset.editor.widgets.editors.csv.CSVDataSetDefAttributesEditor;
+import org.dashbuilder.client.widgets.dataset.editor.widgets.editors.rest.RESTDataSetDefAttributesEditor;
 import org.dashbuilder.client.widgets.dataset.editor.widgets.editors.elasticsearch.ELDataSetDefAttributesEditor;
 import org.dashbuilder.client.widgets.dataset.editor.widgets.editors.sql.SQLDataSetDefAttributesEditor;
 import org.dashbuilder.client.widgets.resources.i18n.DataSetEditorConstants;
@@ -197,6 +198,12 @@ public class DataSetEditorView extends Composite implements DataSetEditor.View {
     @UiField
     CSVDataSetDefAttributesEditor csvDataSetDefAttributesEditor;
 
+    @UiField
+    FlowPanel restAttributesEditionViewPanel;
+
+    @UiField
+    RESTDataSetDefAttributesEditor restDataSetDefAttributesEditor;
+    
     @UiField
     FlowPanel beanAttributesEditionViewPanel;
 
@@ -414,6 +421,19 @@ public class DataSetEditorView extends Composite implements DataSetEditor.View {
     }
 
     @Override
+    public DataSetEditor.View showRESTAttributesEditorView() {
+        workflow.edit(restDataSetDefAttributesEditor, (RESTDataSetDef) dataSetDef);
+        restAttributesEditionViewPanel.setVisible(true);
+        restDataSetDefAttributesEditor.setEditMode(true);
+        showSpecificProviderAttrsEditionView();
+        return this;
+    }
+
+    private boolean isRESTAttributesEditorViewVisible() {
+        return restAttributesEditionViewPanel.isVisible();
+    }
+    
+    @Override
     public DataSetEditor.View showELAttributesEditorView() {
         workflow.edit(elDataSetDefAttributesEditor, (ElasticSearchDataSetDef) dataSetDef);
         elAttributesEditionViewPanel.setVisible(true);
@@ -611,6 +631,9 @@ public class DataSetEditorView extends Composite implements DataSetEditor.View {
                 case CSV:
                     if (isCSVAttributesEditorViewVisible() && hasViolations(csvDataSetDefAttributesEditor.getViolations())) tabErrors(configurationTab);
                     break;
+                case REST:
+                    if (isRESTAttributesEditorViewVisible() && hasViolations(restDataSetDefAttributesEditor.getViolations())) tabErrors(configurationTab);
+                    break;
                 case SQL:
                     if (isSQLAttributesEditorViewVisible() && hasViolations(sqlDataSetDefAttributesEditor.getViolations())) tabErrors(configurationTab);
                     break;
@@ -668,6 +691,7 @@ public class DataSetEditorView extends Composite implements DataSetEditor.View {
         if (dataSetBasicAttributesEditor.getViolations() != null) violations.addAll((Collection) dataSetBasicAttributesEditor.getViolations());
         if (beanDataSetDefAttributesEditor.getViolations() != null) violations.addAll((Collection) beanDataSetDefAttributesEditor.getViolations());
         if (csvDataSetDefAttributesEditor.getViolations() != null) violations.addAll((Collection) csvDataSetDefAttributesEditor.getViolations());
+        if (restDataSetDefAttributesEditor.getViolations() != null) violations.addAll((Collection) restDataSetDefAttributesEditor.getViolations());
         if (sqlDataSetDefAttributesEditor.getViolations() != null) violations.addAll((Collection) sqlDataSetDefAttributesEditor.getViolations());
         if (elDataSetDefAttributesEditor.getViolations() != null) violations.addAll((Collection) elDataSetDefAttributesEditor.getViolations());
         if (dataSetAdvancedAttributesEditor.getViolations() != null) violations.addAll((Collection) dataSetAdvancedAttributesEditor.getViolations());
@@ -689,6 +713,7 @@ public class DataSetEditorView extends Composite implements DataSetEditor.View {
         dataSetBasicAttributesEditor.clear();
         beanDataSetDefAttributesEditor.clear();
         csvDataSetDefAttributesEditor.clear();
+        restDataSetDefAttributesEditor.clear();
         sqlDataSetDefAttributesEditor.clear();
         elDataSetDefAttributesEditor.clear();
         columnsEditor.clear();
@@ -729,6 +754,7 @@ public class DataSetEditorView extends Composite implements DataSetEditor.View {
         advancedAttributesEditionViewPanel.setVisible(false);
         sqlAttributesEditionViewPanel.setVisible(false);
         csvAttributesEditionViewPanel.setVisible(false);
+        restAttributesEditionViewPanel.setVisible(false);
         beanAttributesEditionViewPanel.setVisible(false);
         elAttributesEditionViewPanel.setVisible(false);
         previewTableEditionViewPanel.setVisible(false);
@@ -745,6 +771,7 @@ public class DataSetEditorView extends Composite implements DataSetEditor.View {
         dataSetBasicAttributesEditor.set(dataSetDef);
         beanDataSetDefAttributesEditor.set(dataSetDef);
         csvDataSetDefAttributesEditor.set(dataSetDef);
+        restDataSetDefAttributesEditor.set(dataSetDef);
         sqlDataSetDefAttributesEditor.set(dataSetDef);
         elDataSetDefAttributesEditor.set(dataSetDef);
         previewTableEditor.set(dataSetDef);
@@ -789,6 +816,9 @@ public class DataSetEditorView extends Composite implements DataSetEditor.View {
                 break;
             case SQL:
                 s = DataSetEditorConstants.INSTANCE.sql();
+                break;
+            case REST:
+                s = DataSetEditorConstants.INSTANCE.rest();
                 break;
             case ELASTICSEARCH:
                 s = DataSetEditorConstants.INSTANCE.elasticSearch();

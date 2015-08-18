@@ -25,6 +25,12 @@ import com.google.gwt.resources.client.ImageResource;
  */
 public interface DataSetClientImages extends ClientBundle {
 
+    @Source("images/rest_icon_160.png")
+    DataResource restIcon160();
+
+    @Source("images/rest_icon_32.png")
+    DataResource restIcon32();
+	
     @Source("images/csv_icon_160.png")
     DataResource csvIcon160();
 

@@ -99,6 +99,7 @@ public class DataSetEditor implements IsWidget {
         View showBasicAttributesEditionView(final String uuid);
         View showSQLAttributesEditorView();
         View showBeanAttributesEditorView();
+        View showRESTAttributesEditorView();
         View showCSVAttributesEditorView(final FormPanel.SubmitCompleteHandler submitCompleteHandler);
         View showELAttributesEditorView();
         View showPreviewTableEditionView(final Displayer tableDisplayer);
@@ -423,6 +424,9 @@ public class DataSetEditor implements IsWidget {
                 break;
             case CSV:
                 view.showCSVAttributesEditorView(submitCompleteHandler);
+                break;
+            case REST:
+                view.showRESTAttributesEditorView();
                 break;
             case BEAN:
                 view.showBeanAttributesEditorView();

@@ -92,6 +92,9 @@ public class DataSetProviderTypeEditor extends AbstractDataSetDefEditor implemen
             case CSV:
                 description = DataSetEditorConstants.INSTANCE.csv_description();
                 break;
+            case REST:
+                description = DataSetEditorConstants.INSTANCE.rest_description();
+                break;
             case SQL:
                 description = DataSetEditorConstants.INSTANCE.sql_description();
                 break;
@@ -114,6 +117,11 @@ public class DataSetProviderTypeEditor extends AbstractDataSetDefEditor implemen
                 typeIcon = new Image(DataSetClientResources.INSTANCE.images().csvIcon160().getSafeUri());
                 typeIcon.setAltText(DataSetEditorConstants.INSTANCE.csv());
                 typeIcon.setTitle(DataSetEditorConstants.INSTANCE.csv());
+                break;
+            case REST:
+                typeIcon = new Image(DataSetClientResources.INSTANCE.images().restIcon160().getSafeUri());
+                typeIcon.setAltText(DataSetEditorConstants.INSTANCE.rest());
+                typeIcon.setTitle(DataSetEditorConstants.INSTANCE.rest());
                 break;
             case SQL:
                 typeIcon = new Image(DataSetClientResources.INSTANCE.images().sqlIcon160().getSafeUri());

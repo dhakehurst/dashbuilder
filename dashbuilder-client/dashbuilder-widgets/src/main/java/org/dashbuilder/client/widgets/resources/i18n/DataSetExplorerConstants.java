@@ -38,6 +38,7 @@ public interface DataSetExplorerConstants extends ConstantsWithLookup {
     String delete();
     String bean();
     String csv();
+    String rest();
     String sql();
     String el();
     String enabled();

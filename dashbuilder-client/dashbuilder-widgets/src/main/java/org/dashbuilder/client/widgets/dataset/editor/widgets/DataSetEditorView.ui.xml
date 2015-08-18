@@ -6,6 +6,7 @@
              xmlns:dash-dset-editors="urn:import:org.dashbuilder.client.widgets.dataset.editor.widgets.editors"
              xmlns:dash-dset-editors-sql="urn:import:org.dashbuilder.client.widgets.dataset.editor.widgets.editors.sql"
              xmlns:dash-dset-editors-csv="urn:import:org.dashbuilder.client.widgets.dataset.editor.widgets.editors.csv"
+             xmlns:dash-dset-editors-rest="urn:import:org.dashbuilder.client.widgets.dataset.editor.widgets.editors.rest"
              xmlns:dash-dset-editors-static="urn:import:org.dashbuilder.client.widgets.dataset.editor.widgets.editors.bean"
              xmlns:dash-dset-editors-el="urn:import:org.dashbuilder.client.widgets.dataset.editor.widgets.editors.elasticsearch"
     >
@@ -190,6 +191,10 @@
 
               <g:FlowPanel ui:field="csvAttributesEditionViewPanel" >
                 <dash-dset-editors-csv:CSVDataSetDefAttributesEditor editMode="true" ui:field="csvDataSetDefAttributesEditor"/>
+              </g:FlowPanel>
+
+              <g:FlowPanel ui:field="restAttributesEditionViewPanel" >
+                <dash-dset-editors-rest:RESTDataSetDefAttributesEditor editMode="true" ui:field="restDataSetDefAttributesEditor"/>
               </g:FlowPanel>
 
               <g:FlowPanel ui:field="beanAttributesEditionViewPanel" >

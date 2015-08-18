@@ -8,6 +8,7 @@ import org.dashbuilder.client.widgets.dataset.editor.widgets.editors.DataSetBasi
 import org.dashbuilder.client.widgets.dataset.editor.widgets.editors.DataSetProviderTypeEditor;
 import org.dashbuilder.client.widgets.dataset.editor.widgets.editors.bean.BeanDataSetDefAttributesEditor;
 import org.dashbuilder.client.widgets.dataset.editor.widgets.editors.csv.CSVDataSetDefAttributesEditor;
+import org.dashbuilder.client.widgets.dataset.editor.widgets.editors.rest.RESTDataSetDefAttributesEditor;
 import org.dashbuilder.client.widgets.dataset.editor.widgets.editors.datacolumn.DataColumnBasicEditor;
 import org.dashbuilder.client.widgets.dataset.editor.widgets.editors.elasticsearch.ELDataSetDefAttributesEditor;
 import org.dashbuilder.client.widgets.dataset.editor.widgets.editors.sql.SQLDataSetDefAttributesEditor;
@@ -38,6 +39,7 @@ public final class DataSetDefEditWorkflow {
     interface DataColumnDriver extends SimpleBeanEditorDriver<DataColumnDef, DataColumnBasicEditor> {}
     interface SQLAttributesDriver extends SimpleBeanEditorDriver<SQLDataSetDef, SQLDataSetDefAttributesEditor> {}
     interface CSVAttributesDriver extends SimpleBeanEditorDriver<CSVDataSetDef, CSVDataSetDefAttributesEditor> {}
+    interface RESTAttributesDriver extends SimpleBeanEditorDriver<RESTDataSetDef, RESTDataSetDefAttributesEditor> {}
     interface BeanAttributesDriver extends SimpleBeanEditorDriver<BeanDataSetDef, BeanDataSetDefAttributesEditor> {}
     interface ELAttributesDriver extends SimpleBeanEditorDriver<ElasticSearchDataSetDef, ELDataSetDefAttributesEditor> {}
 
@@ -71,6 +73,12 @@ public final class DataSetDefEditWorkflow {
     public final CSVAttributesDriver csvAttributesDriver = GWT.create(CSVAttributesDriver.class);
 
     /**
+     * <p>Handles REST specific data set definition attributes.</p> 
+     */
+    public final RESTAttributesDriver restAttributesDriver = GWT.create(RESTAttributesDriver.class);
+
+    
+    /**
      * <p>Handles Bean specific data set definition attributes.</p> 
      */
     public final BeanAttributesDriver beanAttributesDriver = GWT.create(BeanAttributesDriver.class);
@@ -87,6 +95,7 @@ public final class DataSetDefEditWorkflow {
     private SQLDataSetDefAttributesEditor sqlAttributesEditor = null;
     private BeanDataSetDefAttributesEditor beanAttributesEditor = null;
     private CSVDataSetDefAttributesEditor csvAttributesEditor = null;
+    private RESTDataSetDefAttributesEditor restAttributesEditor = null;
     private ELDataSetDefAttributesEditor elasticSearchAttributesEditor = null;
     
     public DataSetDefEditWorkflow edit(final DataSetBasicAttributesEditor view, final DataSetDef p) {
@@ -152,6 +161,13 @@ public final class DataSetDefEditWorkflow {
         return this;
     }
 
+    public DataSetDefEditWorkflow edit(final RESTDataSetDefAttributesEditor view, final RESTDataSetDef p) {
+        restAttributesDriver.initialize(view);
+        restAttributesDriver.edit(p);
+        restAttributesEditor = view;
+        return this;
+    }
+    
     public DataSetDefEditWorkflow edit(final BeanDataSetDefAttributesEditor view, final BeanDataSetDef p) {
         beanAttributesDriver.initialize(view);
         beanAttributesDriver.edit(p);
@@ -172,6 +188,7 @@ public final class DataSetDefEditWorkflow {
         if (advancedAttributesEditor != null) saveAdvancedAttributes();
         if (sqlAttributesEditor != null) saveSQLAttributes();
         if (csvAttributesEditor != null) saveCSVAttributes();
+        if (restAttributesEditor != null) saveRESTAttributes();
         if (beanAttributesEditor != null) saveBeanAttributes();
         if (elasticSearchAttributesEditor!= null) saveELAttributes();
         if (!columnEditors.isEmpty()) saveColumns();
@@ -279,6 +296,19 @@ public final class DataSetDefEditWorkflow {
     }
 
     /**
+     * <p>Saves REST data set definition attributes.</p> 
+     */
+    private DataSetDefEditWorkflow saveRESTAttributes() {
+        RESTDataSetDef edited = restAttributesDriver.flush();
+        
+        // Validate server URL.
+        List<Class<?>> groups = new LinkedList<Class<?>>();
+        groups.add(RESTDataSetDefServerURLValidation.class);
+
+        return validateREST(edited, restAttributesEditor, restAttributesDriver, groups.toArray(new Class[groups.size()]));
+    }
+    
+    /**
      * <p>Saves EL data set definition attributes.</p> 
      */
     private DataSetDefEditWorkflow saveELAttributes() {
@@ -321,6 +351,14 @@ public final class DataSetDefEditWorkflow {
         return this;
     }
 
+    private DataSetDefEditWorkflow validateREST(final RESTDataSetDef def, final AbstractEditor editor, final SimpleBeanEditorDriver driver, final Class<?>... groups) {
+        final Validator validator = ValidatorFactory.getDashbuilderValidator();
+        final Set<ConstraintViolation<RESTDataSetDef>> violations = groups != null ? validator.validate(def, groups) : validator.validate(def);
+        final Set<?> test = violations;
+        setViolations(editor, driver, (Iterable<ConstraintViolation<?>>) test);
+        return this;
+    }
+    
     private DataSetDefEditWorkflow validateEL(final ElasticSearchDataSetDef def, final AbstractEditor editor, final SimpleBeanEditorDriver driver) {
         final Validator validator = ValidatorFactory.getDashbuilderValidator();
         final Set<ConstraintViolation<ElasticSearchDataSetDef>> violations = validator.validate(def);
@@ -368,6 +406,7 @@ public final class DataSetDefEditWorkflow {
         advancedAttributesEditor = null;
         sqlAttributesEditor = null;
         csvAttributesEditor = null;
+        restAttributesEditor = null;
         beanAttributesEditor = null;
         elasticSearchAttributesEditor = null;
         columnEditors.clear();

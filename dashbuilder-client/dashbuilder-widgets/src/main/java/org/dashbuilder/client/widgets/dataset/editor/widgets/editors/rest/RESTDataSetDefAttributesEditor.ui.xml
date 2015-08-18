@@ -1,0 +1,56 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+             xmlns:g="urn:import:com.google.gwt.user.client.ui"
+             xmlns:b="urn:import:com.github.gwtbootstrap.client.ui"
+             xmlns:dash-client="urn:import:org.dashbuilder.common.client.validation.editors"
+    >
+
+  <ui:with field="i18n" type="org.dashbuilder.client.widgets.resources.i18n.DataSetEditorConstants"/>
+
+  <ui:style>
+    .mainPanel {
+    }
+    .expressionTextArea {
+      height: 200px;
+    }
+  </ui:style>
+
+  <!-- REST attributes. -->
+  <g:FlowPanel ui:field="restAttributesPanel" addStyleNames="{style.mainPanel}">
+
+    <!-- Server Root URL. -->
+    <b:Row>
+      <b:Column size="2">
+        <g:HTML text="{i18n.rest_URL}"/>
+      </b:Column>
+      <b:Column size="3">
+        <b:Popover showDelay="1000" text="{i18n.rest_URL_description}" heading="{i18n.rest_URL}" placement="BOTTOM">
+          <dash-client:ValueBoxEditorDecorator errorLabelPosition="TOOLTIP_BOTTOM" ui:field="serverRootURL">
+            <dash-client:valuebox>
+              <b:TextBox placeholder="{i18n.rest_URL_placeholder}" />
+            </dash-client:valuebox>
+          </dash-client:ValueBoxEditorDecorator>
+        </b:Popover>
+      </b:Column>
+    </b:Row>
+
+    <!-- Expression -->
+    <b:Row>
+      <b:Column size="2">
+        <g:HTML text="{i18n.rest_expression}"/>
+      </b:Column>
+      <b:Column size="3">
+        <b:Popover showDelay="1000" text="{i18n.rest_expression_description}" heading="{i18n.rest_expression}">
+          <dash-client:ValueBoxEditorDecorator errorLabelPosition="TOOLTIP_TOP" ui:field="expression">
+            <dash-client:valuebox>
+              <b:TextBox placeholder="{i18n.rest_expression_placeholder}" size="8" addStyleNames="{style.expressionTextArea}" />
+            </dash-client:valuebox>
+          </dash-client:ValueBoxEditorDecorator>
+        </b:Popover>
+      </b:Column>
+    </b:Row>
+
+  </g:FlowPanel>
+
+
+</ui:UiBinder>

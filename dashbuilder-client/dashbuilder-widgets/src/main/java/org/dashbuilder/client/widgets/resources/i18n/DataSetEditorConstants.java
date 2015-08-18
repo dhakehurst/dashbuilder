@@ -38,10 +38,12 @@ public interface DataSetEditorConstants extends Messages {
     String selectType();
     String bean();
     String csv();
+    String rest();
     String sql();
     String elasticSearch();
     String bean_description();
     String csv_description();
+    String rest_description();
     String sql_description();
     String elasticSearch_description();
     String next();
@@ -110,6 +112,13 @@ public interface DataSetEditorConstants extends Messages {
     String sql_query_placeHolder();
     String staticAttributes();
     String beanAttributes();
+    String restAttributes();
+    String rest_URL();
+    String rest_URL_description();
+    String rest_URL_placeholder();
+    String rest_expression();
+    String rest_expression_description();
+    String rest_expression_placeholder();
     String csvAttributes();
     String csv_filePath();
     String csv_filePath_description();
