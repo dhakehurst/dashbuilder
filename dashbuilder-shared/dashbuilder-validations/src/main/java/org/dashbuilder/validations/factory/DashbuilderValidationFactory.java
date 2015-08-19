@@ -14,11 +14,12 @@ import javax.validation.Validator;
  */
 public class DashbuilderValidationFactory extends AbstractGwtValidatorFactory {
 
-    @GwtValidation(value = {ElasticSearchDataSetDef.class, BeanDataSetDef.class, CSVDataSetDef.class, SQLDataSetDef.class, DataSetDef.class, DataColumnDef.class},  
+    @GwtValidation(value = {ElasticSearchDataSetDef.class, BeanDataSetDef.class, CSVDataSetDef.class, RESTDataSetDef.class, SQLDataSetDef.class, DataSetDef.class, DataColumnDef.class},  
             groups = {DataSetDefRefreshIntervalValidation.class, 
                     DataSetDefPushSizeValidation.class, DataSetDefCacheRowsValidation.class, 
                     SQLDataSetDefDbTableValidation.class, SQLDataSetDefDbSQLValidation.class,
-                    CSVDataSetDefFilePathValidation.class, CSVDataSetDefFileURLValidation.class
+                    CSVDataSetDefFilePathValidation.class, CSVDataSetDefFileURLValidation.class,
+                    RESTDataSetDefServerURLValidation.class
     })
     public interface DashbuilderValidator extends Validator {
     }

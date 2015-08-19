@@ -1,0 +1,12 @@
+{
+    "uuid": "weather",
+    "name": "Weather",
+    "provider": "REST",
+    "isPublic": true,
+    "pushEnabled": true,
+    "pushMaxSize": 1024,
+    "refreshTime": "2second",
+    "refreshAlways": "false",
+    "serverRootURL": "http://api.openweathermap.org/data/2.5/forecast/daily?q=London&mode=json&units=metric",
+    "expression": "data.list.map(function(el){return {date:new Date(el.dt).toTimeString(),temp:el.temp.day};})",
+}

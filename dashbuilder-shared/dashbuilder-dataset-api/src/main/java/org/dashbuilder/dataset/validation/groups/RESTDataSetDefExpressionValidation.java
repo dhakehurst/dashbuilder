@@ -6,5 +6,5 @@ package org.dashbuilder.dataset.validation.groups;
  * @author Dr. David H. Akehurst
  *
  */
-public interface RESTDataSetDefServerURLValidation {
+public interface RESTDataSetDefExpressionValidation {
 }

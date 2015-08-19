@@ -117,4 +117,10 @@ public interface DataSetValidationMessages extends
     @Key("dataSetApi_dataColumnDef_columnType_notNull")
     String dataSetApi_dataColumnDef_columnType_notNull();
 
+    @Key("dataSetApi_restDataSetDef_url_notNull")
+    String dataSetApi_restDataSetDef_url_notNull();
+ 
+    @Key("dataSetApi_restDataSetDef_expression_notNull")
+    String dataSetApi_restDataSetDef_expression_notNull();
+    
 }

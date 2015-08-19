@@ -19,6 +19,9 @@ import org.dashbuilder.dataset.def.RESTDataSetDef;
 import org.dashbuilder.dataset.def.RESTDataSetDefBuilder;
 import org.dashbuilder.dataset.def.DataSetDef;
 
+/**
+ * @author Dr. David H. Akehurst
+ */
 public class RESTDataSetDefBuilderImpl extends AbstractDataSetDefBuilder<RESTDataSetDefBuilderImpl> implements RESTDataSetDefBuilder<RESTDataSetDefBuilderImpl> {
 
     protected DataSetDef createDataSetDef() {

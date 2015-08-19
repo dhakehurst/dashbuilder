@@ -22,8 +22,12 @@ package org.dashbuilder.dataset.def;
  *    DataSetDef dataSetDef = DataSetDefFactory.newRESTDataSetDef()
  *     .uuid("all_employees")
  *     .serverRootURL("http://myhost.com/servivce/api")
+ *     .expression("[{a:1,b:2},{a:3,b:5}]")
  *     .buildDef();
  * </pre>
+ *
+ * @author Dr. David H. Akehurst
+ *
  */
 public interface RESTDataSetDefBuilder<T extends DataSetDefBuilder> extends DataSetDefBuilder<T> {
 

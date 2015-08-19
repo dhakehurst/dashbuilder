@@ -22,6 +22,9 @@ import org.jboss.errai.common.client.api.annotations.Portable;
 
 import javax.validation.constraints.NotNull;
 
+/**
+ * @author Dr. David H. Akehurst
+ */
 @Portable
 public class RESTDataSetDef extends DataSetDef {
 
@@ -52,7 +55,8 @@ public class RESTDataSetDef extends DataSetDef {
     public DataSetDef clone() {
         RESTDataSetDef def = new RESTDataSetDef();
         clone(def);
-        def.setServerRootURL(getServerRootURL());
+        def.setServerRootURL(this.getServerRootURL());
+        def.setExpression(this.getExpression());
         return def;
     }
     

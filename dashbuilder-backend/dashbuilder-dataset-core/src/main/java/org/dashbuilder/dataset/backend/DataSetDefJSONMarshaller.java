@@ -61,6 +61,11 @@ public class DataSetDefJSONMarshaller {
     public static final String DATEPATTERN = "datePattern";
     public static final String NUMBERPATTERN = "numberPattern";
 
+    // REST related
+    public static final String SERVERROOTURL = "serverRootURL";
+    public static final String EXPRESSION = "expression";
+    
+    
     // SQL related
     public static final String DATA_SOURCE = "dataSource";
     public static final String DB_SCHEMA = "dbSchema";
@@ -105,6 +110,9 @@ public class DataSetDefJSONMarshaller {
         switch (providerType) {
             case CSV:
                 readCSVSettings((CSVDataSetDef) dataSetDef, json);
+                break;
+            case REST:
+                readRESTSettings((RESTDataSetDef) dataSetDef, json);
                 break;
             case SQL:
                 readSQLSettings((SQLDataSetDef) dataSetDef, json);
@@ -294,6 +302,15 @@ public class DataSetDefJSONMarshaller {
         return def;
     }
 
+    public RESTDataSetDef readRESTSettings(RESTDataSetDef def, JSONObject json) throws Exception {
+        String serverRootURL = json.has(SERVERROOTURL) ? json.getString(SERVERROOTURL) : null;
+        String expression = json.has(EXPRESSION) ? json.getString(EXPRESSION) : null;
+
+        if (!StringUtils.isBlank(serverRootURL)) def.setServerRootURL(serverRootURL);
+        if (!StringUtils.isBlank(expression)) def.setExpression(expression);
+        return def;
+    }
+    
     public SQLDataSetDef readSQLSettings(SQLDataSetDef def, JSONObject json) throws Exception {
         String dataSource = json.has(DATA_SOURCE) ? json.getString(DATA_SOURCE) : null;
         String dbTable = json.has(DB_TABLE) ? json.getString(DB_TABLE) : null;
@@ -344,6 +361,8 @@ public class DataSetDefJSONMarshaller {
             toJsonObject(((BeanDataSetDef)dataSetDef), json);
         } else if (dataSetDef instanceof CSVDataSetDef) {
             toJsonObject(((CSVDataSetDef)dataSetDef), json);
+        } else if (dataSetDef instanceof RESTDataSetDef) {
+            toJsonObject(((RESTDataSetDef)dataSetDef), json);
         } else if (dataSetDef instanceof SQLDataSetDef) {
             toJsonObject(((SQLDataSetDef)dataSetDef), json);
         } else if (dataSetDef instanceof ElasticSearchDataSetDef) {
@@ -436,6 +455,13 @@ public class DataSetDefJSONMarshaller {
 
     }
 
+    private void toJsonObject(final RESTDataSetDef dataSetDef, final JSONObject json ) throws JSONException {
+
+        if (dataSetDef.getServerRootURL() != null) json.put( SERVERROOTURL, dataSetDef.getServerRootURL());
+        if (dataSetDef.getExpression() != null) json.put( EXPRESSION, dataSetDef.getExpression());
+
+    }
+    
     private void toJsonObject(final SQLDataSetDef dataSetDef, final JSONObject json ) throws JSONException {
 
         // Data source.

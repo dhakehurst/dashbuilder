@@ -20,6 +20,7 @@ import java.util.List;
 import org.dashbuilder.dataset.def.DataSetDefBuilder;
 import org.dashbuilder.dataset.impl.BeanDataSetDefBuilderImpl;
 import org.dashbuilder.dataset.impl.CSVDataSetDefBuilderImpl;
+import org.dashbuilder.dataset.impl.RESTDataSetDefBuilderImpl;
 import org.dashbuilder.dataset.impl.DataSetBuilderImpl;
 import org.dashbuilder.dataset.impl.DataSetImpl;
 import org.dashbuilder.dataset.impl.DataSetLookupBuilderImpl;
@@ -52,6 +53,10 @@ public final class DataSetFactory {
         return new CSVDataSetDefBuilderImpl();
     }
 
+    public static DataSetDefBuilder<RESTDataSetDefBuilderImpl> newRESTDataSetDef() {
+        return new RESTDataSetDefBuilderImpl();
+    }
+    
     public static DataSetDefBuilder<SQLDataSetDefBuilderImpl> newSQLDataSetDef() {
         return new SQLDataSetDefBuilderImpl();
     }

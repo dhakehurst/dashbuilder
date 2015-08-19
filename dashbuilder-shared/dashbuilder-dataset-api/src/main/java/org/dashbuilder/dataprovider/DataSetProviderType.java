@@ -30,6 +30,11 @@ public enum DataSetProviderType {
     CSV,
 
     /**
+     * For accessing data sets over a REST API.
+     */
+    REST,
+    
+    /**
      * For accessing data sets that are the result of querying an elasticsearch server.
      */
     ELASTICSEARCH;
@@ -48,6 +53,7 @@ public enum DataSetProviderType {
             case BEAN: return new BeanDataSetDef();
             case CSV: return new CSVDataSetDef();
             case SQL: return new SQLDataSetDef();
+            case REST: return new RESTDataSetDef();
             case ELASTICSEARCH: return new ElasticSearchDataSetDef();
         }
         throw new RuntimeException("Unknown type: " + type);

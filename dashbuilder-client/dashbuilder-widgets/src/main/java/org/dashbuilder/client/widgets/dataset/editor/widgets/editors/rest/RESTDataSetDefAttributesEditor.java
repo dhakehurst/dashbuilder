@@ -26,6 +26,7 @@ import org.dashbuilder.dataset.def.DataSetDef;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.editor.client.EditorError;
+import com.google.gwt.editor.client.Editor.Path;
 import com.google.gwt.uibinder.client.UiBinder;
 import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.user.client.ui.FlowPanel;
@@ -35,6 +36,8 @@ import com.google.gwt.user.client.ui.Widget;
  * <p>This is the view implementation for Data Set Editor widget for editing REST provider specific attributes.</p>
  *
  * @since 0.3.0 
+ * @author Dr. David H. Akehurst
+ *  
  */
 @Dependent
 public class RESTDataSetDefAttributesEditor extends AbstractDataSetDefEditor implements RESTDataSetDefEditor {
@@ -46,9 +49,11 @@ public class RESTDataSetDefAttributesEditor extends AbstractDataSetDefEditor imp
     FlowPanel restAttributesPanel;
     
     @UiField
+    @Path("serverRootURL")
     ValueBoxEditorDecorator<String> serverRootURL;
     
     @UiField
+    @Path("expression")
     ValueBoxEditorDecorator<String> expression;
     
     private boolean isEditMode;
