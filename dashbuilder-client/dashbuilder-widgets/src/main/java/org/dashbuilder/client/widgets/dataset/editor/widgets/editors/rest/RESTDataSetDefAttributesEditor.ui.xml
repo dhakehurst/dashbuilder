@@ -43,7 +43,7 @@
         <b:Popover showDelay="1000" text="{i18n.rest_expression_description}" heading="{i18n.rest_expression}">
           <dash-client:ValueBoxEditorDecorator errorLabelPosition="TOOLTIP_TOP" ui:field="expression">
             <dash-client:valuebox>
-              <b:TextBox placeholder="{i18n.rest_expression_placeholder}" size="8" addStyleNames="{style.expressionTextArea}" />
+               <b:TextArea placeholder="{i18n.rest_expression_placeholder}" size="8" addStyleNames="{style.expressionTextArea}" />
             </dash-client:valuebox>
           </dash-client:ValueBoxEditorDecorator>
         </b:Popover>
